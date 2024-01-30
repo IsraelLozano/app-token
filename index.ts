@@ -1,9 +1,9 @@
 require('dotenv').config();
 
-const express = require("express");
-const cors = require('cors')
+import express from "express";
+import cors from 'cors';
 
-const { dbConnection } = require('./database/config')
+import { dbConnection } from './database/config';
 
 //Crear servidor express
 const app = express();
@@ -11,21 +11,17 @@ const app = express();
 //Configurando CORS
 app.use(cors())
 
-//Indicamos el puerto que va a escuchar nuestro servidor
-app.listen(process.env.PORT, () =>
-    console.log(`Escuchando en http://localhost:${process.env.PORT}`)
-);
+//Lectura y parseo del body
+app.use(express.json());
+
 
 //Database
 dbConnection();
 
-
 //Rutas
-app.get('/', (req: any, res: any) => {
-    //Mostrar mensaje de bienvenida
-    res.json({
-        ok: true,
-        message: 'Bienvenido a mi API RESTful by Camoens'
-    })
+app.use('/api/tarjeta', require('./routes/tarjeta'));
 
-});
+//Indicamos el puerto que va a escuchar nuestro servidor
+app.listen(process.env.PORT, () =>
+    console.log(`Escuchando en http://localhost:${process.env.PORT}`)
+);
