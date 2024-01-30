@@ -12,3 +12,10 @@ npm install
 ```
 npm install -D typescript @types/node
 ```
+
+### Una vez instalados todas las dependencias, ejecutar el siguiente commando:
+```
+npm run start:dev
+```
+
+### Más información ver el archivo *word-capturas.docx*
